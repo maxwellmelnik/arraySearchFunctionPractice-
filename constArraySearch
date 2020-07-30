@@ -1,0 +1,78 @@
+
+#include <iostream>
+using namespace std;
+int searchArray (string name, string nameArray[]);
+void printAllNames (string nameArray[], int numToPrint);
+void deleteName (string nameArray[], string name, int nameIndex);
+int main () {
+    string firstNameArray[7] = {"Jim", "Tuyet", "Ann", "Roberto", "Crystal", "Valla", "Mathilda"};
+    string searchName;
+    cout << "Please type name to search: ";
+    cin >> searchName;
+    cout << endl;
+    if (searchArray(searchName, firstNameArray) < 7) {
+        cout << firstNameArray[searchArray(searchName, firstNameArray)] << " is present in the array" << endl << endl;
+    }
+    else {
+        cout << "Name not found" << endl << endl;
+    }
+    string wish;
+    cout << "Do you wish to print names? Answer Y or N: ";
+    cin >> wish;
+    cout << endl;
+    if (wish == "N") {
+        return 0;
+    }
+    else {
+        int numOfNames;
+        cout << "How many names do you want to print? Maximum of 7 names: ";
+        cin >> numOfNames;
+        cout << endl;
+        printAllNames(firstNameArray, numOfNames);
+        cout << endl;
+    }
+    cout << "Do you wish to delete a name? Answer Y or N: ";
+    cin >> wish;
+    cout << endl;
+    if (wish == "N") {
+        return 0;
+    }
+    else {
+        string deletedName;
+        int index;
+        cout << "Which name do you want to delete: ";
+        cin >> deletedName;
+        cout << endl;
+        index = searchArray(deletedName, firstNameArray);
+        if (index == 7) {
+        cout << "The name you wish to delete does not exist." << endl;
+            return 0;
+        }
+        deleteName(firstNameArray, deletedName, index);
+        
+        for (int i = 0; i < 7; i++) {
+            if (i != index) {
+                cout << firstNameArray[i] << endl;
+            }
+        }
+        cout << endl;
+    }
+}
+int searchArray (string name, string nameArray[]) {
+    for (int i = 0; i < 7; i++) {
+        if (name == nameArray[i]) {
+            return i;
+        }
+    }
+    return 7;
+}
+void printAllNames (string nameArray[], int numToPrint) {
+    for (int i = 0; i < numToPrint; i++) {
+        cout << nameArray[i] << endl;
+    }
+}
+void deleteName (string nameArray[], string name, int nameIndex) {
+    if ((searchArray(name, nameArray)) != 7) {
+        nameArray[nameIndex] = " ";
+    }
+}
